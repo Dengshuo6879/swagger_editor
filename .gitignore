@@ -1,4 +1,5 @@
 node_modules
+dist
 .idea
 .deps_check
 .DS_Store

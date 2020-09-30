@@ -20,7 +20,9 @@ export default class JSONSchemaValidator {
   }
 
   addSchema(schema, key) {
-    this.ajv.addSchema(schema, normalizeKey(key))
+    if (!this.ajv.getSchema(normalizeKey(key))) {
+      this.ajv.addSchema(schema, normalizeKey(key))
+    }
   }
 
   validate({ jsSpec, specStr, schemaPath, source }) {

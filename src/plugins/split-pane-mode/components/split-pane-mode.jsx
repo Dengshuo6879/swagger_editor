@@ -38,13 +38,13 @@ export default class SplitPaneMode extends React.Component {
     layoutActions
       .changeMode(MODE_KEY, (
         nearLeftEdge
-        ? MODE_RIGHT : nearRightEdge
-        ? MODE_LEFT : MODE_BOTH
+          ? MODE_RIGHT : nearRightEdge
+            ? MODE_LEFT : MODE_BOTH
       ))
   }
 
   sizeFromMode = (mode, defaultSize) => {
-    if(mode === MODE_LEFT) {
+    if (mode === MODE_LEFT) {
       this.draggedSize = null
       return "0px"
     } else if (mode === MODE_RIGHT) {
@@ -59,8 +59,8 @@ export default class SplitPaneMode extends React.Component {
     let { children, layoutSelectors } = this.props
 
     const mode = layoutSelectors.whatMode(MODE_KEY)
-    const left = mode === MODE_RIGHT ? <noscript/> : children[0]
-    const right = mode === MODE_LEFT ? <noscript/> : children[1]
+    const left = mode === MODE_RIGHT ? <noscript /> : children[0]
+    const right = mode === MODE_LEFT ? <noscript /> : children[1]
     const size = this.sizeFromMode(mode, "50%")
 
     return (
@@ -73,11 +73,12 @@ export default class SplitPaneMode extends React.Component {
         minSize={0}
         size={size}
         onDragFinished={this.onDragFinished}
-        allowResize={mode !== MODE_LEFT && mode !== MODE_RIGHT }
-        resizerStyle={{"flex": "0 0 auto", "position": "relative", "background": "#000", "opacity": ".2", "width": "11px", "cursor": "col-resize"}}
+        allowResize={mode !== MODE_LEFT && mode !== MODE_RIGHT}
+        // resizerStyle={{"flex": "0 0 auto", "position": "relative", "background": "#000", "opacity": ".2", "width": "11px", "cursor": "col-resize"}}
+        resizerStyle={{ display: 'none' }}
       >
-        { left }
-        { right }
+        {left}
+        {right}
       </SplitPane>
     )
   }
