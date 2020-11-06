@@ -83,8 +83,10 @@ export const validateImmediate = ({ spec, path = [] }) => system => {
   const baseSchemaPath = system.jsonSchemaValidatorSelectors.getSchemaBasePath()
 
   // No base path? Then we're unable to do anything...
-  if (!baseSchemaPath.length)
-    throw new Error("Ambiguous schema path, unable to run validation")
+  if (!baseSchemaPath || !baseSchemaPath.length) {
+    console.error("Ambiguous schema path, unable to run validation")
+    return
+  }
 
   return system.jsonSchemaValidatorActions.validateWithBaseSchema({
     spec,
